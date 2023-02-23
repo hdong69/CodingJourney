@@ -10,6 +10,6 @@ def solution(N):
     max = 0
     for i in range(1,len(array)):
       sub = array[i] - array[i-1]
-      if max < sub:
+      if max < sub - 1 :
         max = sub - 1
     return(max)
