@@ -2,11 +2,14 @@ def solution(N):
     # Implement your solution here
     temp_binary = bin(N)
     right_binary = temp_binary.replace("0b", "")
-    components_split=right_binary.split("1")
+    array = []
+    for i in range(1, len(right_binary)+1):
+      if right_binary.startswith('1', i-1):
+        array.append(i)
+
     max = 0
-    if components_split[len(components_split)-1] != "":
-      return 0
-    for i in range(len(components_split)):
-      if max < len(components_split[i]):
-        max = len(components_split[i])
+    for i in range(1,len(array)):
+      sub = array[i] - array[i-1]
+      if max < sub:
+        max = sub - 1
     return(max)
