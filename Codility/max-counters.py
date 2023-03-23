@@ -3,26 +3,19 @@
 
 def solution(N, A):
     # Implement your solution here
-    counters = [0,] * N
-    array_1st = []
-    array_2nd = []
-    
-    if len(A) == 1 and A[0] == 1 and N <= len(A):
-        return [1]
+    counters = [0] * N
+    max_val = 0
+    current_max = 0
+    for v in A:
+        if 1 <= v <= N:
+            if max_val > counters[v-1]:
+                counters[v-1] = max_val
+            counters[v-1] += 1
+            if current_max < counters[v-1]:
+                current_max = counters[v-1]
+        else:
+            max_val = current_max
+    counters = [max(max_val,i) for i in counters]
+    return counters
 
-    for i in range(0, A.index(max(A))):
-        array_1st.append(A[i])
-
-    for j in array_1st:
-        counters[j-1] += 1
-
-    for i in range(0, N):  
-        counters[i] = max(counters)
-  
-    for i in range(A.index(max(A))+1, len(A)):
-        array_2nd.append(A[i])
-
-    for t in array_2nd:
-        counters[t-1] += 1
-
-    return(counters)
+#source: https://codesays.com/2014/solution-to-max-counters-by-codility/
